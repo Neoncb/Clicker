@@ -12,12 +12,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
 
 public class ClickerMain {
 
   JLabel counterLabel, perSecLabel;
   JButton feature1, feature2, feature3, feature4, CloseOnExit, Open;
-  int clickerCounter, timerSpeed;
+  int clickerCounter, timerSpeed, beervalue;
   double perSecond;                   // use of double because of numbers below 1 
   boolean timerOn;
   Font font1, font2;
@@ -34,10 +37,12 @@ public class ClickerMain {
   }
   public ClickerMain() {
     
+    
     timerOn = false;                  // no Auto clicker = Timer off
     perSecond = 0;
     clickerCounter = 0;
     Visible = false;
+    beervalue = clickerCounter; 
     
     createFont();
     InterfaceUI();
@@ -54,15 +59,15 @@ public class ClickerMain {
     public void InterfaceUI(){
       
     JFrame window = new JFrame();               //erstellt das Fenster 
-    window.setSize(1280, 720);
+    window.setSize(1920, 1080);
     window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     window.setExtendedState(JFrame.MAXIMIZED_BOTH);       //Maximierung des Fensters
     window.getContentPane().setBackground(Color.white);
     window.setLayout(null);
     
     JPanel ClickerPanel = new JPanel();             //erstelt Clicker Fenster 
-    ClickerPanel.setBounds(50, 620, 400, 400);
-    ClickerPanel.setBackground(Color.white);
+    ClickerPanel.setBounds(720, 400, 210, 210);
+    ClickerPanel.setBackground(Color.black);
     ClickerPanel.setLayout(new GridBagLayout());
     window.add(ClickerPanel);
     
@@ -79,32 +84,34 @@ public class ClickerMain {
     
     
     JPanel counterPanel = new JPanel();             //erstellt Counter Fenster
-    counterPanel.setBounds(50, 420, 200, 80);
-    counterPanel.setBackground(Color.black);
+    counterPanel.setBounds(50, 60, 300, 80);
+    counterPanel.setBackground(Color.white);
     counterPanel.setLayout(new GridLayout(2, 1));
     window.add(counterPanel);
     
 
     
     counterLabel = new JLabel(clickerCounter + " Beer");   //erstellt die Schrift anzeige
-    counterLabel.setForeground(Color.white);
+    counterLabel.setForeground(Color.black);
     counterLabel.setFont(font1);
     counterPanel.add(counterLabel);
     
     
     perSecLabel = new JLabel();                 //erstellt die Schrift anzeige
-    perSecLabel.setForeground(Color.white);
+    perSecLabel.setForeground(Color.black);
     perSecLabel.setFont(font2);
     counterPanel.add(perSecLabel);
     
+    
+    
     JPanel Board = new JPanel();
-    Board.setBounds(1030, 100, 550, 700);
+    Board.setBounds(1120, 270, 550, 700);
     Board.setBackground(Color.black);
-    Board.setLayout(new GridLayout(1,2));
+    Board.setLayout(new GridLayout(2,1)); 
     window.add(Board);
     
     JPanel ItemPanel = new JPanel();
-    ItemPanel.setBackground(Color.gray);
+    ItemPanel.setBackground(Color.black);
     ItemPanel.setLayout(new GridLayout(4,1));
     Board.add(ItemPanel);
     
@@ -121,7 +128,6 @@ public class ClickerMain {
     feature2.addActionListener(Click);
     feature2.setActionCommand("2");              
     ItemPanel.add(feature2);
-    
     
     feature3 = new JButton("4 Hands");
     feature3.setFont(font1);
@@ -152,7 +158,7 @@ public class ClickerMain {
     Open.setFont(font1);
     Open.setFocusPainted(false);
     Open.addActionListener(Exit);
-    Open.setActionCommand("X");
+    Open.setActionCommand("Open");
     Open.setVisible(Visible);
     Controls.add(Open);
     
@@ -250,7 +256,7 @@ public class ClickerMain {
         CloseOnExit.setVisible(false);
         
         Open.setVisible(true);
-        
+        break;
         
       
       }
